@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    
+    depends_on:
+      - backend
+    networks:
+      - weather-app-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - weather-app-network
+
+networks:
+  weather-app-network:
+    driver: bridge

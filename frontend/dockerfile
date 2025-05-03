@@ -12,8 +12,6 @@ FROM nginx:alpine
 
 COPY --from=build /app/dist /usr/share/nginx/html
 
-COPY nginx-certs/nginx-selfsigned.crt /etc/nginx/certs/nginx-selfsigned.crt
-COPY nginx-certs/nginx-selfsigned.key /etc/nginx/certs/nginx-selfsigned.key
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Expose port 80 (HTTP) and 443 (HTTPS)

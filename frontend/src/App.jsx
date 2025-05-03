@@ -17,8 +17,9 @@ function WeatherApp() {
     try {
       // Use the full URL in development to avoid proxy issues
       const apiUrl = process.env.NODE_ENV === 'production' 
-        ? `/api/weather?city=${encodeURIComponent(city)}`
-        : `http://localhost:3000/api/weather?city=${encodeURIComponent(city)}`;
+  ? `/api/weather?city=${encodeURIComponent(city)}`
+  : `http://backend:5000/api/weather?city=${encodeURIComponent(city)}`;
+
       
       console.log('Fetching from:', apiUrl); // Debug log
       

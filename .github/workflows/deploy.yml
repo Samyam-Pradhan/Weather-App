@@ -19,15 +19,15 @@ jobs:
       - name: Log in to DockerHub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.samyam }}
-          password: ${{ secrets.samyam }}
+          username: ${{ secrets.docker }}
+          password: ${{ secrets.docker }}
 
       - name: Build and push frontend
         run: |
-          docker build -t ${{ secrets.samyam }}/weather-frontend ./frontend
-          docker push ${{ secrets.samyam }}/weather-frontend
+          docker build -t ${{ secrets.docker }}/weather-frontend ./frontend
+          docker push ${{ secrets.docker }}/weather-frontend
 
       - name: Build and push backend
         run: |
-          docker build -t ${{ secrets.samyam }}/weather-backend ./backend
-          docker push ${{ secrets.samyam }}/weather-backend
+          docker build -t ${{ secrets.docker }}/weather-backend ./backend
+          docker push ${{ secrets.docker }}/weather-backend

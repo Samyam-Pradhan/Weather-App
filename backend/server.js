@@ -1,24 +1,20 @@
-// server.js
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
-// Enable CORS for all routes
 app.use(cors());
 
-// Parse JSON bodies
 app.use(express.json());
 
-// Test route
+
 app.get('/test', (req, res) => {
   res.json({ message: 'Server is working!' });
 });
 
-// Weather API endpoint
 app.get('/api/weather', async (req, res) => {
   try {
     const city = req.query.city;
@@ -33,7 +29,7 @@ app.get('/api/weather', async (req, res) => {
       return res.status(500).json({ error: 'API key not configured' });
     }
     
-    console.log(`Fetching weather for: ${city}`); // Debug log
+    console.log(`Fetching weather for: ${city}`); 
 
     const response = await axios.get('https://api.openweathermap.org/data/2.5/weather', {
       params: {
@@ -43,7 +39,7 @@ app.get('/api/weather', async (req, res) => {
       }
     });
     
-    console.log('OpenWeatherMap response status:', response.status); // Debug log
+    console.log('OpenWeatherMap response status:', response.status); 
     res.json(response.data);
   } catch (error) {
     console.error('Error fetching weather data:', error.message);

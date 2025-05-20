@@ -1,0 +1,31 @@
+name: CD Pipeline
+
+on:
+  workflow_run:
+    workflows: ["CI Pipeline"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: self-hosted
+
+    steps:
+      - name: Pull backend Docker image
+        run: sudo docker pull samyampradhan/weather-backend:latest
+
+      - name: Pull frontend Docker image
+        run: sudo docker pull samyampradhan/weather-frontend:latest
+
+      - name: Delete old backend container
+        run: sudo docker rm -f weather-backend-container || true
+
+      - name: Delete old frontend container
+        run: sudo docker rm -f weather-frontend-container || true
+
+      - name: Run backend container
+        run: sudo docker run -d -p 5000:5000 --name weather-backend-container samyampradhan/weather-backend:latest
+
+      - name: Run frontend container
+        run: sudo docker run -d -p 80:80 --name weather-frontend-container samyampradhan/weather-frontend:latest

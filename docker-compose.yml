@@ -9,6 +9,7 @@ services:
       - backend
     networks:
       - weather-app-network
+    restart: unless-stopped
 
   backend:
     image: samyampradhan/weather-backend:latest
@@ -18,6 +19,7 @@ services:
       - NODE_ENV=production
     networks:
       - weather-app-network
+    restart: unless-stopped
 
 networks:
   weather-app-network:

@@ -7,7 +7,6 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-
 dist
 dist-ssr
 *.local
@@ -29,3 +28,7 @@ frontend/node_modules
 
 #nginx certificates
 nginx-certs
+
+# environment files
+.env
+backend/.env

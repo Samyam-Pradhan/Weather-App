@@ -78,7 +78,7 @@ export default function Weather() {
   const bg = weatherBg(weather?.weather?.[0]?.description);
 
   return (
-    <div className={`min-h-screen bg-gradient-to-br ${bg} transition-colors duration-500 font-sans will-change-transform`}>
+    <div className={`min-h-screen bg-linear-to-br ${bg} transition-colors duration-500 font-sans will-change-transform`}>
       {/* Fixed overlay with optimized blur */}
       <div className="min-h-screen bg-black/10 flex flex-col items-center px-4 py-12">
         <div className="mb-10 text-center">

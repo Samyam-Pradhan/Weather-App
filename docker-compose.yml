@@ -1,26 +1,31 @@
-version: "3"
+version: "3.9"
 
 services:
-  frontend:
-    image: samyampradhan/weather-frontend:latest
-    ports:
-      - "8080:80"
-    depends_on:
-      - backend
-    networks:
-      - weather-app-network
-    restart: unless-stopped
-
   backend:
-    image: samyampradhan/weather-backend:latest
+    build: ./backend
+    image: weather-backend
+    container_name: weatherapp-backend
+    env_file:
+      - ./backend/.env
     ports:
       - "5000:5000"
-    environment:
-      - NODE_ENV=production
-    networks:
-      - weather-app-network
     restart: unless-stopped
+    networks:
+      - weather-network
+
+  frontend:
+    build: ./frontend
+    platform: linux/arm64
+    image: weather-frontend
+    container_name: weatherapp-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - weather-network
 
 networks:
-  weather-app-network:
+  weather-network:
     driver: bridge
